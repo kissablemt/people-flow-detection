@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>历史记录</title>
+	<style type="text/css">
+	</style>
+	<!--导入在线js库文件-->
+	<script type="text/javascript" src="/static/js/plotly-latest.min.js"></script>
+</head>
+
+<body>
+	<div class='content'>
+		<div class='graph' id='myDiv'>
+			<!--展现可视化图标部分-->
+			<script>
+				setTimeout(function () {
+					var bars = '{{ context | safe }}';
+					var obj = JSON.parse(bars);
+					Plotly.newPlot('myDiv', obj);
+				}, 1000);
+
+			</script>
+		</div>
+	</div>
+</body>
+
+</html>

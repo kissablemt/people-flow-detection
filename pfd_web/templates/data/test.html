@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plotly嵌入Flask可视化作图案例</title>
+    <style type="text/css">
+    	div.content {padding: 1em 5em;}
+    	div.graph {margin: 10px auto;
+    		       width: 80%;}
+    </style>
+   <!--导入在线js库文件-->
+   <script type="text/javascript" src="/static/js/plotly-latest.min.js"></script>
+</head>
+<body>
+<div class='content'>
+	<h2>用Python和plotly结合flask可视化作图</h2>
+	<div>
+		<p>
+		 文字部分，可自定义设置。
+		</p>
+		<p>
+			文字部分，可自定义设置：
+		</p>
+	</div>
+    <div class='graph' id='myDiv'>
+    <!--展现可视化图标部分-->
+    <script>
+    	var bars = '{{ context | safe }}';
+    	var obj = JSON.parse(bars);
+    	Plotly.newPlot('myDiv', obj);
+    </script>
+   </div>
+	<div>
+    	<p>从图上可以看出，文字部分，可自定义设置</p>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!--_meta 作为公共模版分离出去-->
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<link rel="Bookmark" href="/favicon.ico">
+	<link rel="Shortcut Icon" href="/favicon.ico" />
+	<!--[if lt IE 9]>
+<script type="text/javascript" src="/static/h-ui/lib/html5shiv.js"></script>
+<script type="text/javascript" src="/static/h-ui/lib/respond.min.js"></script>
+<![endif]-->
+	<link rel="stylesheet" type="text/css" href="/static/h-ui/css/H-ui.min.css" />
+	<link rel="stylesheet" type="text/css" href="/static/h-ui/css/H-ui.css" />
+	<link rel="stylesheet" type="text/css" href="/static/h-ui/lib/Hui-iconfont/1.0.8/iconfont.css" />
+	<link rel="stylesheet" type="text/css" href="/static/h-ui/skin/default/skin.css" id="skin" />
+	<link rel="stylesheet" type="text/css" href="/static/h-ui/css/style.css" />
+	<!--[if IE 6]>
+<script type="text/javascript" src="/static/h-ui/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+	<!--/meta 作为公共模版分离出去-->
+
+	<title>优化添加</title>
+	<meta name="keywords" content="h-ui v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
+	<meta name="description" content="h-ui v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
+</head>
+
+<body style='height:100%'>
+	<article class="page-container" style="margin: 5%;">
+		<div class="cl pd-5 bg-1 bk-gray mt-20">
+			<span class="l">
+				<a class="btn btn-primary radius" onclick="select()" href="javascript:;">
+					<i class="Hui-iconfont">&#xe600;</i>选择场景</a>
+			</span>
+		</div>
+		<div class="row cl pd-5 bg-1 bk-gray mt-20" style="margin-top: 1%; margin-left: 0%;">
+			<label class="form-label col-xs-4 col-sm-3">场景ID：</label>
+			<input name="productId" id="scene_id" style="border:none;" readonly="readonly" placeholder='未选择'>
+		</div>
+		<div class="row cl pd-5 bg-1 bk-gray mt-20" style="margin-top: 1%; margin-left: 0%;">
+			<label class="form-label col-xs-4 col-sm-3">场景名称：</label>
+			<input name="productName" id="name" style="border:none;" readonly="readonly" placeholder='未选择'>
+		</div>
+	</article>
+	<iframe src="" width="100%" height="600" id="via" style="display: none">
+		
+	</iframe>
+
+	<!--_footer 作为公共模版分离出去-->
+	<script type="text/javascript" src="/static/h-ui/lib/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/static/h-ui/lib/layer/2.4/layer.js"></script>
+	<script type="text/javascript" src="/static/h-ui/js/H-ui.min.js"></script>
+	<script type="text/javascript" src="/static/h-ui/js/H-ui.js"></script>
+	<!--/_footer 作为公共模版分离出去-->
+
+	<!--请在下方写此页面业务相关的脚本-->
+	<script type="text/javascript" src="/static/h-ui/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+	<script type="text/javascript" src="/static/h-ui/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+	<script type="text/javascript" src="/static/h-ui/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+	<script type="text/javascript" src="/static/h-ui/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			$('.skin-minimal input').iCheck({
+				checkboxClass: 'icheckbox-blue',
+				radioClass: 'iradio-blue',
+				increaseArea: '20%'
+			});
+
+			$("#form-member-add").validate({
+				rules: {},
+				onkeyup: false,
+				focusCleanup: true,
+				success: "valid",
+				submitHandler: function (form) {
+					var name = $('#name').val();
+					var source = $('#source').val();
+					var tag = $('#tag').val();
+					$.ajax({
+						url: "{{ url_for('scene.add_scene')}}",
+						type: "POST",
+						data: {
+							"name": name,
+							"source": source,
+							"tag": tag,
+						},
+						success(res) {
+							console.log(res)
+							var index = parent.layer.getFrameIndex(window.name);
+							parent.location.reload();
+							parent.layer.close(index);
+						},
+						error(err) { console.log(err) },
+					})
+
+				}
+			});
+		});
+
+		/*选择场景*/
+		function select() {
+			layer.open({
+				type: 2,
+				area: [480 + 'px', 640 + 'px'],
+				fix: false, //不固定
+				maxmin: true,
+				title: "场景选择",
+				content: "{{ url_for('scene.select')}}",
+			});
+		}
+	</script>
+	<!--/请在上方写此页面业务相关的脚本-->
+</body>
+
+</html>

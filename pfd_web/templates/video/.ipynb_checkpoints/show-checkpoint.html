@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Video Streaming Demonstration</title>
+    <style type="text/css"></style>
+</head>
+
+<body onunload="stop()">
+    <h1>Video Streaming Demonstration</h1>
+    <div>
+        <div id="video_id">{{video_id}}</div>
+        <div id="video_source">{{video_source}}</div>
+        <div id="video_box" style="float: left;">
+            <img src="{{ url_for('video.video_feed', video_id=video_id, video_source=video_source) }}" height="100%">
+        </div>
+        <div id="btn_box">
+            <button onclick="stop()">Stop</button>
+            <button onclick="replay()">Replay</button>
+            <button onclick="pause()">Pause</button>
+        </div>
+    </div>
+</body>
+
+<script src="/static/js/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        setInterval(function () {
+            $.ajax({
+                url: "{{ url_for('video.check')}}",
+                type: "POST",
+                data: { "video_id": "{{video_id}}" },
+                success(res) { console.log(res) },
+                error(err) { console.log(err) },
+            })
+        }, 5000);
+    });
+
+    window.onbeforeunload = function (e) {
+        stop();
+    };
+
+    function stop() {
+        $.ajax({
+            url: "{{ url_for('test.stop')}}",
+            type: "POST",
+            data: { "video_id": "{{video_id}}" },
+            success(res) { console.log(res) },
+            error(err) { console.log(err) },
+        })
+    }
+    function replay() {
+
+    }
+    function pause() {
+        alert("???")
+    }
+</script>
+
+</html>

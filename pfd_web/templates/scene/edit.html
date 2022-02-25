@@ -1,0 +1,220 @@
+<!--_meta 作为公共模版分离出去-->
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<link rel="Bookmark" href="/favicon.ico">
+	<link rel="Shortcut Icon" href="/favicon.ico" />
+	<!--[if lt IE 9]>
+<script type="text/javascript" src="/static/h-ui/lib/html5shiv.js"></script>
+<script type="text/javascript" src="/static/h-ui/lib/respond.min.js"></script>
+<![endif]-->
+	<link rel="stylesheet" type="text/css" href="/static/h-ui/css/H-ui.min.css" />
+	<link rel="stylesheet" type="text/css" href="/static/h-ui/css/H-ui.css" />
+	<link rel="stylesheet" type="text/css" href="/static/h-ui/lib/Hui-iconfont/1.0.8/iconfont.css" />
+	<link rel="stylesheet" type="text/css" href="/static/h-ui/skin/default/skin.css" id="skin" />
+	<link rel="stylesheet" type="text/css" href="/static/h-ui/css/style.css" />
+	<!--[if IE 6]>
+<script type="text/javascript" src="/static/h-ui/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+	<!--/meta 作为公共模版分离出去-->
+
+	<title>场景修改</title>
+	<meta name="keywords" content="h-ui v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
+	<meta name="description" content="h-ui v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
+</head>
+
+<body>
+	<article class="page-container">
+		<form action="" method="post" class="form form-horizontal" id="form-member-add">
+			<h4>Base Settings</h4>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>场景名称：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="{{scene.name}}" placeholder="" id="name" name="name">
+				</div>
+			</div>
+
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>视频源：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="{{scene.source}}" placeholder="" id="source" name="source">
+				</div>
+			</div>
+
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">标签：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="{{scene.tag}}" placeholder="" id="tag" name="tag">
+				</div>
+			</div>
+			
+			<br>
+			<hr>
+			<h4>Detector Settings</h4>
+
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">预测分：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="{{scene.predict_score}}" placeholder="预测分低于此值则直接忽略" id="predict_score" name="predict_score">
+				</div>
+			</div>
+
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">置信分：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="{{scene.confidence_score}}" placeholder="预测分高于此值则直接选中" id="confidence_score" name="confidence_score">
+				</div>
+			</div>
+
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">最大重叠度：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="{{scene.max_overlap}}" placeholder="重叠度高于此值则进行NMS" id="max_overlap" name="max_overlap">
+				</div>
+			</div>
+
+			<br>
+			<hr>
+			<h4>Tracker Settings</h4>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">最大消失距离：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="{{scene.max_dist}}" placeholder="Deep SORT最大消失距离" id="max_dist" name="max_dist">
+				</div>
+			</div>
+
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">最低分：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="{{scene.min_confidence}}" placeholder="预测分低于此值则不进行跟踪" id="min_confidence" name="min_confidence">
+				</div>
+			</div>
+			
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">非极大值抑制最大重叠度：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="{{scene.nms_max_overlap}}" placeholder="重叠度高于此值则进行NMS" id="nms_max_overlap" name="nms_max_overlap">
+				</div>
+			</div>
+
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">最大IoU距离：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="{{scene.max_iou_distance}}" placeholder="Deep SORT最大IoU距离" id="max_iou_distance" name="max_iou_distance">
+				</div>
+			</div>
+
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">最大消失周期：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="{{scene.max_age}}" placeholder="消失周期高于此值则从库中删除" id="max_age" name="max_age">
+				</div>
+			</div>
+
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">最少连续帧：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="{{scene.n_init}}" placeholder="高于此值的连续检测数则加入追踪" id="n_init" name="n_init">
+				</div>
+			</div>
+
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">检测库容量：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="{{scene.nn_budget}}" placeholder="检测库大小高于此值则删除最初的追踪" id="nn_budget" name="nn_budget">
+				</div>
+			</div>
+
+			<div class="row cl">
+				<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+					<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+				</div>
+			</div>
+		</form>
+	</article>
+
+	<!--_footer 作为公共模版分离出去-->
+	<script type="text/javascript" src="/static/h-ui/lib/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/static/h-ui/lib/layer/2.4/layer.js"></script>
+	<script type="text/javascript" src="/static/h-ui/js/H-ui.min.js"></script>
+	<script type="text/javascript" src="/static/h-ui/js/H-ui.js"></script>
+	<!--/_footer 作为公共模版分离出去-->
+
+	<!--请在下方写此页面业务相关的脚本-->
+	<script type="text/javascript" src="/static/h-ui/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+	<script type="text/javascript" src="/static/h-ui/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+	<script type="text/javascript" src="/static/h-ui/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+	<script type="text/javascript" src="/static/h-ui/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			$('.skin-minimal input').iCheck({
+				checkboxClass: 'icheckbox-blue',
+				radioClass: 'iradio-blue',
+				increaseArea: '20%'
+			});
+
+			$("#form-member-add").validate({
+				rules: {},
+				onkeyup: false,
+				focusCleanup: true,
+				success: "valid",
+				submitHandler: function (form) {
+					var name = $('#name').val();
+					var source = $('#source').val();
+					var tag = $('#tag').val();
+					var predict_score = $("#predict_score").val();
+					var confidence_score = $("#confidence_score").val();
+					var max_overlap = $("#max_overlap").val();
+					var max_dist = $("#max_dist").val();
+					var min_confidence = $("#min_confidence").val();
+					var nms_max_overlap = $("#nms_max_overlap").val();
+					var max_iou_distance = $("#max_iou_distance").val();
+					var max_age = $("#max_age").val();
+					var n_init = $("#n_init").val();
+					var nn_budget = $("#nn_budget").val();
+					
+					$.ajax({
+						url: "{{ url_for('scene.edit_scene')}}",
+						type: "POST",
+						data: { 
+							"scene_id": "{{scene_id}}",
+							"name": name, 
+							"source": source,
+							"tag": tag,
+							"predict_score": predict_score,
+							"confidence_score": confidence_score,
+							"max_overlap": max_overlap,
+
+							"max_dist": max_dist,
+							"min_confidence": min_confidence,
+							"nms_max_overlap": nms_max_overlap,
+							"max_iou_distance": max_iou_distance,
+							"max_age": max_age,
+							"n_init": n_init,
+							"nn_budget": nn_budget,
+						},
+						success(res) { 
+							console.log(res)
+							var index = parent.layer.getFrameIndex(window.name);
+							parent.location.reload(); 
+							parent.layer.close(index);
+						},
+						error(err) { console.log(err) },
+					})
+					
+				}
+			});
+		});
+	</script>
+	<!--/请在上方写此页面业务相关的脚本-->
+</body>
+
+</html>
